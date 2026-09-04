@@ -10,8 +10,8 @@ from data_preprocessing import prepare_data, build_preprocessing_pipeline
 from model_evaluation import evaluate_predictions, print_metrics, get_sample_table
 
 def train_and_save():
-    raw_df = pd.read_csv('data/cars.csv')
-    df = add_features(clean_car_data(raw_df))
+    df = pd.read_csv('data/cars_features.csv')
+    
     
     X_train, X_test, y_train, y_test, num_cols, cat_cols = prepare_data(df)
     preprocessor = build_preprocessing_pipeline(num_cols, cat_cols)

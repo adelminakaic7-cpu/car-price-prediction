@@ -13,19 +13,24 @@ def add_features(df):
     if 'mileage' in df.columns and 'car_age' in df.columns:
         df['mileage_per_year'] = df['mileage'] / df['car_age']
         
-    # 3. Zapremina motora u litrima 
+    # 3. Zapremina motora u litrima (npr. 2000 cm3 -> 2.0L)
     if 'volume' in df.columns:
         df['engine_volume_liters'] = df['volume'] / 1000.0
         
+
     return df
 
-# Testiranje skripte u terminalu
 if __name__ == '__main__':
-    from data_cleaning import clean_car_data
+    # 1. Učitavanje očišćenog fajla
+    df_clean = pd.read_csv('data/cars_cleaned.csv')
     
-    df_raw = pd.read_csv('data/cars_cleaned.csv')
-    df_clean = clean_car_data(df_raw)
-    df_featured = add_features(df_clean)
+    # 2. Dodavanje novih kolona
+    df_features = add_features(df_clean)
     
-    print("Nove kolone uspješno dodane!")
-    print("Kolone u tabeli:", list(df_featured.columns))
+    # 3. Snimanje u novi CSV fajl
+    output_path = 'data/cars_features.csv'
+    df_features.to_csv(output_path, index=False)
+    
+    print("Inženjering karakteristika je uspješno završen!")
+    print(f"Novi fajl sačuvan u: {output_path}")
+    print(f"Nove kolone u skupu: {[c for c in df_features.columns if c not in df_clean.columns]}")

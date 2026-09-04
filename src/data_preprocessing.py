@@ -47,7 +47,7 @@ if __name__ == '__main__':
     import pandas as pd
     
     # Testno učitavanje i provjera funkcija
-    df = pd.read_csv('data/cars_cleaned.csv')
+    df = pd.read_csv('data/cars_features.csv')
     X_train, X_test, y_train, y_test, num_cols, cat_cols = prepare_data(df)
     
     print("=== TEST PRETPROCESIRANJA ===")
